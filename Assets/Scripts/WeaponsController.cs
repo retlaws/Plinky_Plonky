@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum WeaponType
-{
-    multiShot 
-
-}
-
-
 public class WeaponsController : MonoBehaviour
 {
     [SerializeField] List<Weapon> weapons;
@@ -21,19 +14,9 @@ public class WeaponsController : MonoBehaviour
         currentWeapon = weapons[0];
     }
 
-    public void ChangeWeapon(WeaponType replacementWeaponType)
+    public void ChangeWeapon(int playerLevel)
     {
-        if(replacementWeaponType == currentWeapon.weaponType) { return; }
-
-        for (int i = 0; i < weapons.Count; i++)
-        {
-            if(replacementWeaponType == weapons[i].weaponType)
-            {
-                currentWeapon.gameObject.SetActive(false); 
-                currentWeapon = weapons[i];
-                currentWeapon.gameObject.SetActive(true); 
-            }
-        }
+        currentWeapon = weapons[playerLevel - 1];
     }
 
     public void Fire()
@@ -43,13 +26,11 @@ public class WeaponsController : MonoBehaviour
 
     public void OnFireHoldStart(InputAction.CallbackContext context)
     {
-        print("OnFireHoldStart");
         StartCoroutine(ContinuousFiring());
     }
 
     public void OnFireHoldPerformed(InputAction.CallbackContext context)
     {
-        print("OnHoldFirePerformed");
         StopAllCoroutines();
     }
 

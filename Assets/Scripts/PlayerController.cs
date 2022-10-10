@@ -6,9 +6,16 @@ public class PlayerController : MonoBehaviour
 {
     [Range(3f, 10f)]
     [SerializeField] float playerSpeed = 2f;
-    [SerializeField] float xAxisWorldBorder = 1f; 
+    [Header("Screen Borders")]
+    [SerializeField] float xAxisWorldBorder = 1f;
     [SerializeField] float bottomOfScreenBorder = 1f;
     [SerializeField] float topOfScreenBorder = 1f;
+
+    [Header("Player Sprites")]
+    [SerializeField] Sprite level;
+    [SerializeField] Sprite leftBank;
+    [SerializeField] Sprite rightBank;
+
 
     PlayerInput playerInput;
     WeaponsController weaponsController;
@@ -16,15 +23,17 @@ public class PlayerController : MonoBehaviour
     InputAction move;
     InputAction fire;
     InputAction fireHold;
-    
-    
+
+    SpriteRenderer spriteRenderer;
     Camera cam;
     Rect cameraRect;
+    bool controlsDisabled = false;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         weaponsController = GetComponent<WeaponsController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         GetInputActions();
         cam = Camera.main; //TODO this is hacky but will do
     }
@@ -40,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         fire.performed += Fire;
         fireHold.started += weaponsController.OnFireHoldStart;
-        fireHold.performed += weaponsController.OnFireHoldPerformed; 
+        fireHold.performed += weaponsController.OnFireHoldPerformed;
     }
 
     private void OnDisable()
@@ -57,9 +66,41 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(move.ReadValue<Vector2>() * playerSpeed * Time.deltaTime, Space.Self);
+        if (controlsDisabled) { return; }
+
+        Vector2 rawMovementInput = move.ReadValue<Vector2>();
+        transform.Translate(rawMovementInput * playerSpeed * Time.deltaTime, Space.Self);
+
+        if (rawMovementInput.x > 0)
+        {
+            spriteRenderer.sprite = rightBank;
+        }
+        else if (rawMovementInput.x < 0)
+        {
+            spriteRenderer.sprite = leftBank;
+        }
+        else
+        {
+            spriteRenderer.sprite = level;
+        }
 
         ClampPlayerToCameraLimits();
+    }
+
+    public void DisableControls()
+    {
+        controlsDisabled = true;
+        fire.performed -= Fire;
+        fireHold.started -= weaponsController.OnFireHoldStart;
+        fireHold.performed -= weaponsController.OnFireHoldPerformed;
+    }
+
+    public void EnableControls()
+    {
+        controlsDisabled = true;
+        fire.performed += Fire;
+        fireHold.started += weaponsController.OnFireHoldStart;
+        fireHold.performed += weaponsController.OnFireHoldPerformed;
     }
 
     private void ClampPlayerToCameraLimits()

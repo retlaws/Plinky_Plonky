@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public WeaponType weaponType;
     public float fireRate = 2f;
+    [SerializeField] float speedOfProjectile = 10f;
 
     [Header("Projectile Starts")]
     [SerializeField] Transform[] transforms;
-    [SerializeField] float speedOfProjectile = 10f;
     [SerializeField] GameObject shotPrefab;
     [SerializeField] Transform player;
     public void Fire()

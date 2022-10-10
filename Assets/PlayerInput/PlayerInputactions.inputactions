@@ -284,6 +284,17 @@
                     "action": "FireHold",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "666a7652-9fcd-461b-9eb8-6d9f41409688",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Press(behavior=1),Hold",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "FireHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
