@@ -12,6 +12,7 @@ public class WeaponsController : MonoBehaviour
     private void Awake()
     {
         currentWeapon = weapons[0];
+
     }
 
     public void ChangeWeapon(int playerLevel)
