@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance;
 
     private void Awake()
@@ -15,12 +14,16 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this; 
-        DontDestroyOnLoad(this);
     }
 
     public void StartNewGame()
     {
         SceneManager.LoadSceneAsync("Game");
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()

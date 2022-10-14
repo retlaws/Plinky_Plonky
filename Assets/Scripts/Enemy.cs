@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int enemyScoreValue = 1;
     [SerializeField] int enemyHealth = 2;
-    [SerializeField] float rateOfFire = 2f;
-
 
     [Header("Movement")]
     [Range(-10f, 10f)]
@@ -46,8 +42,10 @@ public class Enemy : MonoBehaviour
         if(collision.GetComponent<Projectile>() != null)
         {
             scoreManager.UpdateScore(enemyScoreValue);
-            enemyHealth--; 
-            if(enemyHealth == 0)
+            enemyHealth--;
+            collision.gameObject.SetActive(false);
+            collision.GetComponent<SpriteRenderer>().enabled = false;
+            if (enemyHealth == 0)
             {
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject); // should just move it to a pool at this stage

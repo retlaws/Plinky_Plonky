@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2355325010312730952, guid: ab05683aa089e8d49b190cc24bbb4fde, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2355325010312730953, guid: ab05683aa089e8d49b190cc24bbb4fde, type: 3}
       propertyPath: enemyHealth
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2355325010312730954, guid: ab05683aa089e8d49b190cc24bbb4fde, type: 3}
       propertyPath: m_RootOrder

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class backstop : MonoBehaviour
+public class EnemyBackstop : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Projectile>() != null)
+        if (collision.GetComponent<Enemy>() != null)
         {
             Destroy(collision.gameObject);
         }

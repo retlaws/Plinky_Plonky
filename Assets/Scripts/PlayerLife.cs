@@ -6,15 +6,17 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] GameObject smokeFXPrefab;
     [SerializeField] AudioSource lifePickup;
 
+    ScoreManager scoreManager;
 
     private void Start()
     {
         uiManager.Instance.UpdatePlayerLifeText(numberOfLives);
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Enemy>() != null)
+        if(collision.GetComponent<Enemy>() != null || collision.GetComponent<EnemyProjectile>() != null)
         {
             numberOfLives--;
             if(numberOfLives <= 0)
@@ -24,11 +26,13 @@ public class PlayerLife : MonoBehaviour
             else
             {
                 Instantiate(smokeFXPrefab, transform.position , Quaternion.identity, transform);
+                scoreManager.ResetPlayerCurrentScore();
                 uiManager.Instance.UpdatePlayerLifeText(numberOfLives);
             }
         }
     }
 
+    
     public void AddLife()
     {
         numberOfLives++;

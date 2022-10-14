@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite level;
     [SerializeField] Sprite leftBank;
     [SerializeField] Sprite rightBank;
-
+    [SerializeField] GameObject sideJets;
+    [SerializeField] GameObject centralJet; 
 
     PlayerInput playerInput;
     WeaponsController weaponsController;
@@ -74,14 +75,21 @@ public class PlayerController : MonoBehaviour
         if (rawMovementInput.x > 0)
         {
             spriteRenderer.sprite = rightBank;
+            centralJet.SetActive(true);
+            sideJets.SetActive(false);
+
         }
         else if (rawMovementInput.x < 0)
         {
             spriteRenderer.sprite = leftBank;
+            centralJet.SetActive(true);
+            sideJets.SetActive(false);
         }
         else
         {
             spriteRenderer.sprite = level;
+            centralJet.SetActive(false);
+            sideJets.SetActive(true);
         }
 
         ClampPlayerToCameraLimits();

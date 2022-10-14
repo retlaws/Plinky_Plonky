@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject itemToSpawn;
     [SerializeField] int numberOfSpawnLocations = 10;
     [SerializeField] float spawnMultiplier = 3f;
-
+    [SerializeField] int levelAtWhichToStartASpawning = 1; 
 
     PlayerLevelController playerLevelController;
     List<Vector2> spawnPos = new List<Vector2>();
@@ -42,6 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        if(playerLevel < levelAtWhichToStartASpawning) { return; }
         counter += Random.Range(1f * (playerLevel * spawnMultiplier), 10f * (playerLevel * spawnMultiplier)) * Time.deltaTime;
 
         if(randomCalculated == false)
@@ -77,6 +75,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void UpdateScoreTracker(int level)
     {
+        print(level);
         playerLevel = level; 
     }
 }

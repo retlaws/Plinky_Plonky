@@ -27,11 +27,10 @@ public class ScoreManager : MonoBehaviour
         spawner = FindObjectOfType<EnemySpawner>();
     }
 
-    private void ResetPlayerCurrentScore()
+    public void ResetPlayerCurrentScore()
     {
         runningScore = 0;
-        playerLevelController.UpdatePlayerLevel(runningScore);
-        uiManager.Instance.UpdateScoreText(totalScore);
+        playerLevelController.ResetPlayerToLevel01();
     }
 
     public void UpdateScore(int value)
