@@ -14,16 +14,21 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this; 
+        DontDestroyOnLoad(this);
     }
 
     public void StartNewGame()
     {
         SceneManager.LoadSceneAsync("Game");
+        Cursor.visible = false;
+
     }
 
     public void ReloadLevel()
     {
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        SceneManager.LoadSceneAsync("Game");
+        Time.timeScale = 1.0f;
+        Cursor.visible = false;
     }
 
     public void QuitGame()
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         uiManager.Instance.GameOver();
         FindObjectOfType<PlayerController>().DisableControls();
+        Cursor.visible = true;
     }
 
 }

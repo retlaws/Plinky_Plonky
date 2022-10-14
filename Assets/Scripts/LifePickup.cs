@@ -26,7 +26,6 @@ public class LifePickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("collided");
         PlayerLife playerLife = collision.GetComponent<PlayerLife>();
         if (playerLife != null)
         {

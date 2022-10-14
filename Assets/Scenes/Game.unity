@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemToSpawn: {fileID: 7876973868154110702, guid: 09967cd7cabb70647943aba72f200fe2, type: 3}
   numberOfSpawnLocations: 10
-  spawnMultiplier: 3
+  spawnMultiplier: 0.4
   levelAtWhichToStartASpawning: 1
 --- !u!212 &1058408345
 SpriteRenderer:
